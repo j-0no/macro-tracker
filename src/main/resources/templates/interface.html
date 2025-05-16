@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Interface</title>
+</head>
+<body>
+<h1>Lista de Alimentos</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Alimento</th>
+        <th>Calorias</th>
+        <th>Proteínas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${alimentos}">
+        <td th:text="${a.nome}">Nome</td>
+        <td th:text="${a.calorias}">Calorias</td>
+        <td th:text="${a.proteinas}">Proteínas</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Enter Data</h2>
+<form th:action="@{/interface}" method="post" th:object="${alimento}">
+    <div>
+        <label>Nome:</label>
+        <input type="text" id="name" th:field="*{nome}" />
+    </div>
+    <div>
+        <label>calorias:</label>
+        <input type="number" id="calorias" th:field="*{calorias}" />
+    </div>
+    <div>
+        <label>proteina:</label>
+        <input type="number" id="proteina" th:field="*{proteinas}" />
+    </div>
+    <div>
+        <label>gordura:</label>
+        <input type="number" id="gordura" th:field="*{gorduras}" />
+    </div>
+    <div>
+        <label>carboidrato:</label>
+        <input type="number" id="carboidrato" th:field="*{carboidratos}" />
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+</body>
+</html>
