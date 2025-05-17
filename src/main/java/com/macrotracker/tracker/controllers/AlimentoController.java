@@ -26,5 +26,3 @@ public class AlimentoController {
         return repository.findAll();
     }
 }
-
-

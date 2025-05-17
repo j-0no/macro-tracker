@@ -28,7 +28,4 @@ public class Alimento {
 
     public Alimento() {}
 
-    public Alimento(String frango, int i, int i1, int i2) {
-    }
 }
-

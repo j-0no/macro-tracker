@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class InterfaceController {
 
+    List<Alimento> listaDoDia = new ArrayList<>();
     private final AlimentoRepository alimentoRepository;
 
     public InterfaceController(AlimentoRepository alimentoRepository) {
@@ -29,11 +32,19 @@ public class InterfaceController {
 
     @GetMapping("/interface")
     public String mostrarPagina(Model model) {
-
         List<Alimento> lista = alimentoRepository.findAll();
         model.addAttribute("alimentos", lista);
         model.addAttribute("alimento", new Alimento());
+
+        model.addAttribute("listaDoDia", listaDoDia);
+
         return "interface";
     }
 
+
+     @PostMapping("/interface/adicionar-dia")
+     public String salvarAlimento(@RequestParam List<Long> ids) {
+         List<Alimento> selecionados = alimentoRepository.findAllById(ids);
+         return "redirect:/interface";
+    }
 }

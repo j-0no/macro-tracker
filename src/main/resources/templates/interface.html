@@ -10,19 +10,27 @@
 <table border="1">
     <thead>
     <tr>
+        <th>Add</th>
         <th>Alimento</th>
         <th>Calorias</th>
         <th>Proteínas</th>
+        <th>Carboidratos</th>
+        <th>Gorduras</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="a : ${alimentos}">
+        <td><input type="checkbox" name="ids" value="${a.id}"></td>
         <td th:text="${a.nome}">Nome</td>
         <td th:text="${a.calorias}">Calorias</td>
         <td th:text="${a.proteinas}">Proteínas</td>
+        <td th:text="${a.carboidratos}">Carboidratos</td>
+        <td th:text="${a.gorduras}">Gorduras</td>
     </tr>
     </tbody>
 </table>
+<button type="submit">Adicionar a lista do dia</button>
+
 
 <h2>Enter Data</h2>
 <form th:action="@{/interface}" method="post" th:object="${alimento}">
@@ -35,21 +43,44 @@
         <input type="number" id="calorias" th:field="*{calorias}" />
     </div>
     <div>
-        <label>proteina:</label>
+        <label>proteinas:</label>
         <input type="number" id="proteina" th:field="*{proteinas}" />
     </div>
     <div>
-        <label>gordura:</label>
+        <label>gorduras:</label>
         <input type="number" id="gordura" th:field="*{gorduras}" />
     </div>
     <div>
-        <label>carboidrato:</label>
+        <label>carboidratos:</label>
         <input type="number" id="carboidrato" th:field="*{carboidratos}" />
     </div>
 
     <button type="submit">Submit</button>
 </form>
 
+
+<h1>Lista de Alimentos do Dia</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Alimento</th>
+        <th>Calorias</th>
+        <th>Proteínas</th>
+        <th>Carboidratos</th>
+        <th>Gorduras</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="s : ${selecionados}">
+        <td th:text="${s.nome}">Nome</td>
+        <td th:text="${s.calorias}">Calorias</td>
+        <td th:text="${s.proteinas}">Proteínas</td>
+        <td th:text="${s.carboidratos}">Carboidratos</td>
+        <td th:text="${s.gorduras}">Gorduras</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
