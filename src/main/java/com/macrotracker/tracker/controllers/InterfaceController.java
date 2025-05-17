@@ -39,6 +39,16 @@ public class InterfaceController {
         model.addAttribute("alimento", new Alimento());
         model.addAttribute("listaDoDia",listaDoDia);
 
+        double totalCalorias = listaDoDia.stream().mapToDouble(Alimento::getCalorias).sum();
+        double totalProteinas = listaDoDia.stream().mapToDouble(Alimento::getProteinas).sum();
+        double totalCarboidratos = listaDoDia.stream().mapToDouble(Alimento::getCarboidratos).sum();
+        double totalGorduras = listaDoDia.stream().mapToDouble(Alimento::getGorduras).sum();
+
+        model.addAttribute("totalCalorias", totalCalorias);
+        model.addAttribute("totalProteinas", totalProteinas);
+        model.addAttribute("totalCarboidratos", totalCarboidratos);
+        model.addAttribute("totalGorduras", totalGorduras);
+
         return "interface";
     }
 
