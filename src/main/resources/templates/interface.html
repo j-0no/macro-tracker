@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Lista de Alimentos</h1>
-
+<form th:action="@{/interface/adicionar-dia}" method="post">
 <table border="1">
     <thead>
     <tr>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
     <tr th:each="a : ${alimentos}">
-        <td><input type="checkbox" name="ids" value="${a.id}"></td>
+        <td><input type="checkbox" name="ids" th:value="${a.id}"></td>
         <td th:text="${a.nome}">Nome</td>
         <td th:text="${a.calorias}">Calorias</td>
         <td th:text="${a.proteinas}">Proteínas</td>
@@ -30,7 +30,7 @@
     </tbody>
 </table>
 <button type="submit">Adicionar a lista do dia</button>
-
+</form>
 
 <h2>Enter Data</h2>
 <form th:action="@{/interface}" method="post" th:object="${alimento}">
@@ -72,7 +72,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="s : ${selecionados}">
+    <tr th:each="s : ${listaDoDia}">
         <td th:text="${s.nome}">Nome</td>
         <td th:text="${s.calorias}">Calorias</td>
         <td th:text="${s.proteinas}">Proteínas</td>

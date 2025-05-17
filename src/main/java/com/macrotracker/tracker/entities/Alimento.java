@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class Alimento {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "alimento_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "nome")

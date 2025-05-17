@@ -15,7 +15,9 @@ import java.util.List;
 @Controller
 public class InterfaceController {
 
+    //List<Long> ids = new ArrayList<>();
     List<Alimento> listaDoDia = new ArrayList<>();
+
     private final AlimentoRepository alimentoRepository;
 
     public InterfaceController(AlimentoRepository alimentoRepository) {
@@ -35,8 +37,7 @@ public class InterfaceController {
         List<Alimento> lista = alimentoRepository.findAll();
         model.addAttribute("alimentos", lista);
         model.addAttribute("alimento", new Alimento());
-
-        model.addAttribute("listaDoDia", listaDoDia);
+        model.addAttribute("listaDoDia",listaDoDia);
 
         return "interface";
     }
@@ -44,7 +45,9 @@ public class InterfaceController {
 
      @PostMapping("/interface/adicionar-dia")
      public String salvarAlimento(@RequestParam List<Long> ids) {
-         List<Alimento> selecionados = alimentoRepository.findAllById(ids);
+         listaDoDia.addAll(alimentoRepository.findAllById(ids));
+         System.out.println(listaDoDia);
          return "redirect:/interface";
     }
+
 }
