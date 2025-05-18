@@ -1,6 +1,7 @@
 package com.macrotracker.tracker.controllers;
 
 import com.macrotracker.tracker.repositories.AlimentoRepository;
+import com.macrotracker.tracker.services.MacroCalculatorService;
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import com.macrotracker.tracker.entities.Alimento;
@@ -16,12 +17,13 @@ import java.util.List;
 @Controller
 public class InterfaceController {
 
-    //List<Long> ids = new ArrayList<>();
+    private final MacroCalculatorService macroCalculator;
     List<Alimento> listaDoDia = new ArrayList<>();
 
     private final AlimentoRepository alimentoRepository;
 
-    public InterfaceController(AlimentoRepository alimentoRepository) {
+    public InterfaceController(MacroCalculatorService macroCalculator, AlimentoRepository alimentoRepository) {
+        this.macroCalculator = macroCalculator;
         this.alimentoRepository = alimentoRepository;
     }
 
@@ -40,10 +42,10 @@ public class InterfaceController {
         model.addAttribute("alimento", new Alimento());
         model.addAttribute("listaDoDia",listaDoDia);
 
-        double totalCalorias = listaDoDia.stream().mapToDouble(Alimento::getCalorias).sum();
-        double totalProteinas = listaDoDia.stream().mapToDouble(Alimento::getProteinas).sum();
-        double totalCarboidratos = listaDoDia.stream().mapToDouble(Alimento::getCarboidratos).sum();
-        double totalGorduras = listaDoDia.stream().mapToDouble(Alimento::getGorduras).sum();
+        double totalCalorias = macroCalculator.calcularTotalCalorias(listaDoDia);
+        double totalProteinas =   macroCalculator.calcularTotalProteinas(listaDoDia);
+        double totalCarboidratos =  macroCalculator.calcularTotalCarboidratos(listaDoDia);
+        double totalGorduras =  macroCalculator.calcularTotalGorduras(listaDoDia);
 
         model.addAttribute("totalCalorias", totalCalorias);
         model.addAttribute("totalProteinas", totalProteinas);
