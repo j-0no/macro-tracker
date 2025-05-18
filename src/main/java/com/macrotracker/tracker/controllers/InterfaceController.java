@@ -1,6 +1,7 @@
 package com.macrotracker.tracker.controllers;
 
 import com.macrotracker.tracker.repositories.AlimentoRepository;
+import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import com.macrotracker.tracker.entities.Alimento;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class InterfaceController {
 
 
     @PostMapping("/interface")
-    public String salvarAlimento(@ModelAttribute("alimento") Alimento alimento) {
+    public String salvarAlimento(@Valid @ModelAttribute("alimento") Alimento alimento) {
         alimentoRepository.save(alimento);
         return "redirect:/interface";
     }
