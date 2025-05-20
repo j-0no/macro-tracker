@@ -38,4 +38,7 @@ public class Alimento {
 
     public Alimento() {}
 
+    @ManyToOne
+    @JoinColumn(name = "refeicao_id")
+    private Refeicao refeicao;
 }

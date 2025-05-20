@@ -62,5 +62,4 @@ public class InterfaceController {
          System.out.println(listaDoDia);
          return "redirect:/interface";
     }
-
 }
