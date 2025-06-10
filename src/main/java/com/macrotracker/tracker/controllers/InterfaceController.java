@@ -62,4 +62,17 @@ public class InterfaceController {
          System.out.println(listaDoDia);
          return "redirect:/interface";
     }
+
+    @PostMapping("/interface/deletar")
+    public String deletarAlimento(@RequestParam Long id) {
+        alimentoRepository.deleteById(id);
+        return "redirect:/interface";
+    }
+
+    @PostMapping("/interface/remover-dia")
+    public String removerDaListaDoDia(@RequestParam Long id) {
+        listaDoDia.removeIf(alimento -> alimento.getId().equals(id));
+        return "redirect:/interface";
+    }
+
 }

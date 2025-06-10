@@ -36,7 +36,6 @@ public class AlimentoController {
         if (alimentoExiste.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
@@ -63,5 +62,4 @@ public class AlimentoController {
         return ResponseEntity.ok(alimentoAtual);
 
     }
-
 }

@@ -1,12 +1,17 @@
 package com.macrotracker.tracker.services;
 
 import com.macrotracker.tracker.entities.Alimento;
+import com.macrotracker.tracker.repositories.AlimentoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MacroCalculatorService {
+
+    @Autowired
+    private AlimentoRepository alimentoRepository;
 
     public double calcularTotalCalorias(List<Alimento> alimentos) {
         return alimentos.stream().mapToDouble(a -> a.getCalorias() != null ? a.getCalorias() : 0.0).sum();

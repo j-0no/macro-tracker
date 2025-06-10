@@ -19,7 +19,7 @@ public class Alimento {
     @Column(name = "nome")
     private String nome;
 
-    @Min(1)
+    @Min(1) 
     @NotNull(message = "Calories is mandatory and diferent than 0")
     @Column(name = "calorias")
     private Double calorias;

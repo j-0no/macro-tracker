@@ -1,105 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Interface</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Lista de Alimentos</h1>
-<form th:action="@{/interface/adicionar-dia}" method="post">
-<table border="1">
-    <thead>
-    <tr>
-        <th>Add</th>
-        <th>Alimento</th>
-        <th>Calorias</th>
-        <th>Proteínas</th>
-        <th>Carboidratos</th>
-        <th>Gorduras</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="a : ${alimentos}">
-        <td><input type="checkbox" name="ids" th:value="${a.id}"></td>
-        <td th:text="${a.nome}">Nome</td>
-        <td th:text="${a.calorias}">Calorias</td>
-        <td th:text="${a.proteinas}">Proteínas</td>
-        <td th:text="${a.carboidratos}">Carboidratos</td>
-        <td th:text="${a.gorduras}">Gorduras</td>
-    </tr>
-    </tbody>
-</table>
-<button type="submit">Adicionar a lista do dia</button>
-</form>
+<div class="container">
+    <div class="main-section">
+        <h1>Lista de Alimentos</h1>
+        <form th:action="@{/interface/adicionar-dia}" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <th>Add</th>
+                    <th>Alimento</th>
+                    <th>Calorias</th>
+                    <th>Proteínas</th>
+                    <th>Carboidratos</th>
+                    <th>Gorduras</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${alimentos}">
+                    <td><input type="checkbox" name="ids" th:value="${a.id}"></td>
+                    <td th:text="${a.nome}">Nome</td>
+                    <td th:text="${a.calorias}">Calorias</td>
+                    <td th:text="${a.proteinas}">Proteínas</td>
+                    <td th:text="${a.carboidratos}">Carboidratos</td>
+                    <td th:text="${a.gorduras}">Gorduras</td>
+                    <td>
+                        <button type="submit" formaction="/interface/deletar" formmethod="post" name="id" th:value="${a.id}"> 🗑️ </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit">Adicionar à lista do dia</button>
+        </form>
 
-<h2>Enter Data</h2>
-<form th:action="@{/interface}" method="post" th:object="${alimento}">
-    <div>
-        <label>Nome:</label>
-        <input type="text" id="name" th:field="*{nome}" />
-    </div>
-    <div>
-        <label>calorias:</label>
-        <input type="number" id="calorias" th:field="*{calorias}" />
-    </div>
-    <div>
-        <label>proteinas:</label>
-        <input type="number" id="proteina" th:field="*{proteinas}" />
-    </div>
-    <div>
-        <label>gorduras:</label>
-        <input type="number" id="gordura" th:field="*{gorduras}" />
-    </div>
-    <div>
-        <label>carboidratos:</label>
-        <input type="number" id="carboidrato" th:field="*{carboidratos}" />
+        <h2>Inserir Novo Alimento</h2>
+        <form th:action="@{/interface}" method="post" th:object="${alimento}">
+            <label>Nome: <input type="text" id="name" th:field="*{nome}" /></label>
+            <label>Calorias: <input type="number" id="calorias" th:field="*{calorias}" /></label>
+            <label>Proteínas: <input type="number" id="proteina" th:field="*{proteinas}" /></label>
+            <label>Gorduras: <input type="number" id="gordura" th:field="*{gorduras}" /></label>
+            <label>Carboidratos: <input type="number" id="carboidrato" th:field="*{carboidratos}" /></label>
+            <button type="submit">Submit</button>
+        </form>
     </div>
 
-    <button type="submit">Submit</button>
-</form>
+    <div class="sidebar">
+        <h1>Lista de Alimentos do Dia</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Alimento</th>
+                <th>Calorias</th>
+                <th>Proteínas</th>
+                <th>Carboidratos</th>
+                <th>Gorduras</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${listaDoDia}">
+                <td th:text="${s.nome}">Nome</td>
+                <td th:text="${s.calorias}">Calorias</td>
+                <td th:text="${s.proteinas}">Proteínas</td>
+                <td th:text="${s.carboidratos}">Carboidratos</td>
+                <td th:text="${s.gorduras}">Gorduras</td>
+                <td>
+                    <form th:action="@{/interface/remover-dia}" method="post">
+                        <input type="hidden" name="id" th:value="${s.id}" />
+                        <button type="submit">🗑️</button>
+                    </form>
+                </td>
 
+            </tr>
+            </tbody>
+        </table>
 
-<h1>Lista de Alimentos do Dia</h1>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>Alimento</th>
-        <th>Calorias</th>
-        <th>Proteínas</th>
-        <th>Carboidratos</th>
-        <th>Gorduras</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="s : ${listaDoDia}">
-        <td th:text="${s.nome}">Nome</td>
-        <td th:text="${s.calorias}">Calorias</td>
-        <td th:text="${s.proteinas}">Proteínas</td>
-        <td th:text="${s.carboidratos}">Carboidratos</td>
-        <td th:text="${s.gorduras}">Gorduras</td>
-    </tr>
-    </tbody>
-</table>
-<h2>Totais do Dia</h2>
-<table>
-    <tr>
-        <td>Calorias Totais:</td>
-        <td th:text="${totalCalorias}">0</td>
-    </tr>
-    <tr>
-        <td>Proteínas Totais:</td>
-        <td th:text="${totalProteinas}">0</td>
-    </tr>
-    <tr>
-        <td>Carboidratos Totais:</td>
-        <td th:text="${totalCarboidratos}">0</td>
-    </tr>
-    <tr>
-        <td>Gorduras Totais:</td>
-        <td th:text="${totalGorduras}">0</td>
-    </tr>
-</table>
-
+        <h2>Totais do Dia</h2>
+        <table>
+            <tr>
+                <td>Calorias:</td>
+                <td th:text="${totalCalorias}">0</td>
+            </tr>
+            <tr>
+                <td>Proteínas:</td>
+                <td th:text="${totalProteinas}">0</td>
+            </tr>
+            <tr>
+                <td>Carboidratos:</td>
+                <td th:text="${totalCarboidratos}">0</td>
+            </tr>
+            <tr>
+                <td>Gorduras:</td>
+                <td th:text="${totalGorduras}">0</td>
+            </tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>
